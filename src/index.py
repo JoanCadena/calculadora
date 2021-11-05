@@ -9,12 +9,9 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
-@app.route('/interpolacion')
-def interpolacion():
-    return render_template('index.html')
-
 @app.route('/rk_4to')
 def rk_4to_front():
+    difs
     return render_template('index.html')
 
 @app.route('/rk_4to/<string:x1>/<string:y1>/<string:h>/<string:fun>/<string:xf>')
@@ -44,10 +41,41 @@ def rk_4to(x1,y1,h,fun,xf):
         xsol.append(xa)
         ysol.append(yn)
         i += 1
-    print(xsol,ysol)
 
-    #return xsol, ysol
-    return render_template('index.html')
+    return ('La respuesta es ' + str(xsol) + ' y ' +  str(ysol))
+
+def difs(lx,ly):
+    if len(lx) == 2:
+        return (ly[0]-ly[1])/(lx[0]-lx[1])
+    else:
+        return (difs(lx[1:],ly[1:]) - difs(lx[:-1],ly[:-1]))/(lx[-1] - lx[0])
+
+@app.route('/interpolacion/<string:x1>/<string:lx>/<string:ly>')
+def interpolacion(x1,lx,ly):
+    lx = lx.split(",")
+    ly = ly.split(",")
+    lx = list(lx)
+    ly = list(ly)
+    
+    for k,j,cont in zip(lx,ly,range(len(lx))):
+        k = float(k)
+        j = float(j)
+        lx[cont] = k
+        ly[cont] = j
+        
+    x1 = float(x1)
+    result = 0
+    aux = 0
+    for i in range(len(lx)):
+        if i != 0:  
+            aux = lx[0]
+            for j in range(i):
+                aux *= (x1 - lx[j])
+            result += aux * difs(lx[:(i+1)],ly[:(i+1)])
+        else:
+            result = ly[0]
+    return ('La respuesta es ' + str(result))
+    #return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
