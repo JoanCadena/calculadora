@@ -5,13 +5,13 @@ from sympy import *
 
 app = Flask(__name__, template_folder='template')
 
-@app.route('/home')
+@app.route('/')
 def home():
     return render_template('index.html')
 
 @app.route('/rk_4to')
 def rk_4to_front():
-    return render_template('index.html')
+    return render_template('rk_4to.html')
 
 @app.route('/rk_4to/<string:x1>/<string:y1>/<string:h>/<string:fun>/<string:xf>')
 def rk_4to(x1,y1,h,fun,xf):
@@ -42,6 +42,10 @@ def rk_4to(x1,y1,h,fun,xf):
         i += 1
 
     return ('La respuesta es ' + str(xsol) + ' y ' +  str(ysol))
+
+@app.route('/interpolacion')
+def interpolacion_front():
+    return render_template('interpolacion.html')
 
 def difs(lx,ly):
     if len(lx) == 2:

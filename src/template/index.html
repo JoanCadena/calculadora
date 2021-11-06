@@ -1,13 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <title>Calculadora</title>
-</head>
-<body>
-    <h1>Hola Mundo, recibido</h1>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='css/main.css') }}"
+        />
+        <title>Calculadora</title>
+    </head>
+    <body>
+        <div id="container">
+            <center>
+                <img
+                    src="https://images.vexels.com/media/users/3/156593/isolated/preview/641d34a32b39c9900879ed3c122e5242-iconos-de-viaje-de-icono-de-calculadora.png"
+                    alt="calculadora"
+                    width="300px"
+                />
+                <span>
+                    <p>
+                        Bienvenido a nuestro sitio web de calculadora<br />
+                        para los metodos de Interpolación y Runge-Kutta<br />
+                        con los cuales podras solucionar los problemas<br />
+                        relacionados aa estos metodos que necesites
+                    </p>
+                    <p>
+                        Desarrollado por:<br />
+                        Joan Sebastian Cadena Paternina<br />
+                        Miguel Angel Alvarez Rios
+                    </p>
+                </span>
+                <a href="/interpolacion"><button>Ir al metodo de Interpolación</button></a>
+                <a href="/rk_4to"><button>Ir al metodo de Runge-Kutta</button></a>
+            </center>
+        </div>
+    </body>
 </html>
