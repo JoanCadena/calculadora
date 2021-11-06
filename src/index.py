@@ -1,9 +1,9 @@
 from flask import Flask, render_template
 import numpy as np
 from sympy import * 
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='template')
 
 @app.route('/home')
 def home():
@@ -11,7 +11,6 @@ def home():
 
 @app.route('/rk_4to')
 def rk_4to_front():
-    difs
     return render_template('index.html')
 
 @app.route('/rk_4to/<string:x1>/<string:y1>/<string:h>/<string:fun>/<string:xf>')
@@ -52,29 +51,42 @@ def difs(lx,ly):
 
 @app.route('/interpolacion/<string:x1>/<string:lx>/<string:ly>')
 def interpolacion(x1,lx,ly):
+
+    x1 = x1.split(",")
+    x1 = list(x1)
     lx = lx.split(",")
     ly = ly.split(",")
     lx = list(lx)
     ly = list(ly)
-    
-    for k,j,cont in zip(lx,ly,range(len(lx))):
-        k = float(k)
-        j = float(j)
-        lx[cont] = k
-        ly[cont] = j
+    for z in range(len(x1)):
+        x1[z] = float(x1[z])
+
+    resX = []
+
+    for xfinal in x1:
         
-    x1 = float(x1)
-    result = 0
-    aux = 0
-    for i in range(len(lx)):
-        if i != 0:  
-            aux = lx[0]
-            for j in range(i):
-                aux *= (x1 - lx[j])
-            result += aux * difs(lx[:(i+1)],ly[:(i+1)])
-        else:
-            result = ly[0]
-    return ('La respuesta es ' + str(result))
+        for k,j,cont in zip(lx,ly,range(len(lx))):
+            k = float(k)
+            j = float(j)
+            lx[cont] = k
+            ly[cont] = j
+        
+
+        result = 0
+        aux = 0
+        for i in range(len(lx)):
+            if i != 0:  
+                aux = lx[0]
+                for j in range(i):
+                    aux *= (xfinal - lx[j])
+                result += aux * difs(lx[:(i+1)],ly[:(i+1)])
+            else:
+                result = ly[0]
+
+        resX.append(result)
+
+            
+    return ('La respuesta es ' + str(resX))
     #return render_template('index.html')
 
 if __name__ == '__main__':
