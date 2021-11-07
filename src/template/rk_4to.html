@@ -11,42 +11,29 @@
         <title>Runge-Kutta</title>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script type="text/javascript">
-
+        <script language="JavaScript">
             function mostrar(texto){
-
                 swal({
-
                     title: 'La Respuesta es:',
                     text: texto,
                     icon: 'success'
-
                 });
             }
-
-        </script>
-        <script language="JavaScript">
             async function file_get_contents(uri, callback) {
                 let res = await fetch(uri),
                     ret = await res.text();
-                return callback ? callback(ret) : ret; // a Promise() actually.
+                return callback ? callback(ret) : ret;
             }
             function imprimir() {
                 const formulario = document.querySelector("form");
                 const data = new FormData(formulario);
                 url = "http://127.0.0.1:5000/rk_4to/" + 
-                data.getAll("x") +
-                "/" + 
-                data.getAll("y") + 
-                "/" + 
-                data.getAll("h") +
-                "/" + 
-                data.getAll("fx") +
-                "/" + 
-                data.getAll("xf")
+                data.getAll("x") + "/" + 
+                data.getAll("y") + "/" + 
+                data.getAll("h") + "/" + 
+                data.getAll("fx") + "/" + 
+                data.getAll("xf");
                 formulario.setAttribute("action", url);
-                console.log(url);
-
                 file_get_contents(url, mostrar);
             }
         </script>
@@ -79,6 +66,6 @@
                 <input type="reset" id="b" value="Limpiar">
             </form>
         </div>
-        
+        <a href="/interpolacion"><button>Ir al metodo de Interpolación</button></a>
     </body>
 </html>
