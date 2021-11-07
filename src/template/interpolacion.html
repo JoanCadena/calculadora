@@ -1,13 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/interpolacion.css') }}">
-    <title>Interpolación</title>
-</head>
-<body>
-    
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='css/interpolacion.css') }}"
+        />
+        <title>Interpolación</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script language="JavaScript">
+            async function file_get_contents(uri, callback) {
+                let res = await fetch(uri),
+                    ret = await res.text();
+                return callback ? callback(ret) : ret; // a Promise() actually.
+            }
+            function imprimir() {
+                const formulario = document.querySelector("form");
+                const data = new FormData(formulario);
+                console.log(data.getAll("x"));
+                url =
+                    "http://127.0.0.1:5000/interpolacion/" +
+                    data.getAll("x") +
+                    "/" +
+                    data.getAll("lx") +
+                    "/" +
+                    data.getAll("ly");
+                formulario.setAttribute("action", url);
+
+                file_get_contents(url, alert);
+            }
+        </script>
+    </head>
+    <body>
+        <div id="container">
+            <form id="form">
+                <div class="row">
+                    <p>X a evaluar</p>
+                    <div class="col">
+                        <input type="text" name="x" /><br />
+                        <input type="text" name="x" /><br />
+                        <input type="text" name="x" /><br />
+                    </div>
+                    <p>Lista de X</p>
+                    <div class="col">
+                        <input type="text" name="lx" /><br />
+                        <input type="text" name="lx" /><br />
+                        <input type="text" name="lx" /><br />
+                        <input type="text" name="lx" /><br />
+                    </div>
+                    <p>Lista de Y</p>
+                    <div class="col">
+                        <input type="text" name="ly" /><br />
+                        <input type="text" name="ly" /><br />
+                        <input type="text" name="ly" /><br />
+                        <input type="text" name="ly" /><br />
+                    </div>
+
+                    <label id="mostrar"></label>
+                </div>
+                <button type="button" onclick="imprimir()">Visualizar resultado</button>
+            </form>
+            <label id="somediv"></label>
+        </div>
+    </body>
 </html>

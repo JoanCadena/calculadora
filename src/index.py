@@ -91,7 +91,7 @@ def interpolacion(x1,lx,ly):
 
             
     return ('La respuesta es ' + str(resX))
-    #return render_template('index.html')
+    #return render_template('prueba.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
