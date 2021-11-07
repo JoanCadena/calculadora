@@ -28,7 +28,6 @@ body{
 
 #b:hover{
   color: red;
-  border-color:black;
   transform: translatey(3px);
 }
 

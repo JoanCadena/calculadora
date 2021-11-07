@@ -12,12 +12,22 @@
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script language="JavaScript">
-            function mostrar(texto){
-                swal({
-                    title: 'La Respuesta es:',
-                    text: texto,
-                    icon: 'success'
-                });
+            function mostrar(texto) {
+                if (texto.includes('Found') || texto.includes('ValueError')) {
+                    swal({
+                        title: "Error",
+                        text: 'Los valores ingresados no son correctos o permitidos',
+                        icon: "error",
+                    }).then( function(){ 
+                        window.location.replace('http://127.0.0.1:5000/interpolacion')
+                    });
+                } else {
+                    swal({
+                        title: "La Respuesta es:",
+                        text: texto,
+                        icon: "success",
+                    });
+                }
             }
             async function file_get_contents(uri, callback) {
                 let res = await fetch(uri),
@@ -27,24 +37,35 @@
             function imprimir() {
                 const formulario = document.querySelector("form");
                 const data = new FormData(formulario);
-                console.log(data.getAll("x"));
                 url =
                     "http://127.0.0.1:5000/interpolacion/" +
-                    data.getAll("x") + "/" +
-                    data.getAll("lx") + "/" +
+                    data.getAll("x") +
+                    "/" +
+                    data.getAll("lx") +
+                    "/" +
                     data.getAll("ly");
                 formulario.setAttribute("action", url);
                 file_get_contents(url, mostrar);
             }
-            function addInput(){
-                let todo = ['#copX', '#copLX', '#copLY' ]
-                let divs = ['#xs', '#lxs', '#lys']
+            function addInput() {
+                let todo = ["#copX", "#copLX", "#copLY"];
+                let divs = ["#xs", "#lxs", "#lys"];
                 for (let i = 0; i < todo.length; i++) {
-                    let clon = document.querySelector(todo[i]).cloneNode( true );
-                    var br = document.createElement("br");  
-                    clon.removeAttribute('id');
+                    let clon = document.querySelector(todo[i]).cloneNode(true);
+                    var br = document.createElement("br");
+                    clon.removeAttribute("id");
                     document.querySelector(divs[i]).appendChild(clon);
                     document.querySelector(divs[i]).appendChild(br);
+                }
+                menos.removeAttribute("disabled");
+            }
+            function removeInput() {
+                let todo = ["xs", "lxs", "lys"];
+                for (let i = 0; i < todo.length; i++) {
+                    let dele = document.getElementById(todo[i]);
+                    console.log(dele.lastChild);
+                    dele.removeChild(dele.lastChild);
+                    dele.removeChild(dele.lastChild);
                 }
             }
         </script>
@@ -53,26 +74,44 @@
         <div id="container" class="container-fluid">
             <center><h3>Metodo de Interpolación</h3></center>
             <form id="form">
-                <input type="button" value="+" onclick="addInput()" style="display: inline-block; margin: 20px;" />
-                <div id="xs" style="display: inline-block; margin: 20px;">
-                    <p>X a evaluar</p><br/>
+                <input
+                    type="button"
+                    value="+"
+                    onclick="addInput()"
+                    style="display: inline-block; margin: 10px"
+                />
+                <input
+                    disabled
+                    id="menos"
+                    type="button"
+                    value="-"
+                    onclick="removeInput()"
+                    style="display: inline-block; margin: 10px"
+                />
+                <div id="xs" style="display: inline-block; margin: 20px">
+                    <p>X a evaluar</p>
+                    <br />
                     <input id="copX" type="text" name="x" /><br />
                 </div>
 
-                <div id="lxs" style="display: inline-block; margin: 20px;">
+                <div id="lxs" style="display: inline-block; margin: 20px">
                     <p>Lista de X</p>
                     <input id="copLX" type="text" name="lx" /><br />
                     <input type="text" name="lx" /><br />
                 </div>
 
-                <div id="lys" style="display: inline-block; margin: 20px; margin-right: 0">
+                <div
+                    id="lys"
+                    style="display: inline-block; margin: 20px; margin-right: 0"
+                >
                     <p>Lista de Y</p>
                     <input id="copLY" type="text" name="ly" /><br />
                     <input type="text" name="ly" /><br />
                 </div>
                 <button type="button" onclick="imprimir()">Visualizar resultado</button>
+                <input type="reset" id="b" value="Limpiar">
             </form>
         </div>
-        <a href="/rk_4to"><button>Ir al metodo de Runge-Kutta</button></a>
+        <center><a href="/rk_4to"><button style="margin: 15px">Ir al metodo de Runge-Kutta</button></a></center>
     </body>
 </html>

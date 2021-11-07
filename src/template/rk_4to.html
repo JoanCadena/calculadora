@@ -13,11 +13,21 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script language="JavaScript">
             function mostrar(texto){
-                swal({
-                    title: 'La Respuesta es:',
-                    text: texto,
-                    icon: 'success'
-                });
+                if (texto.includes('Found') || texto.includes('ValueError')) {
+                    swal({
+                        title: "Error",
+                        text: 'Los valores ingresados no son correctos o permitidos',
+                        icon: "error",
+                    }).then( function(){ 
+                        window.location.replace('http://127.0.0.1:5000/rk_4to')
+                    });
+                } else {
+                    swal({
+                        title: "La Respuesta es:",
+                        text: texto,
+                        icon: "success",
+                    });
+                }
             }
             async function file_get_contents(uri, callback) {
                 let res = await fetch(uri),
@@ -40,9 +50,7 @@
     </head>
     <body>
         <div id="container">
-            <center>
-                <h3>Metodo Runge-Kutta 4to orden</h3>
-            </center>
+            <center><h3>Metodo Runge-Kutta 4to orden</h3></center>
             <form id="form">
                 <p>Ingrese el parametro X inicial</p>
                 <input type="text" name="x" />
@@ -66,6 +74,6 @@
                 <input type="reset" id="b" value="Limpiar">
             </form>
         </div>
-        <a href="/interpolacion"><button>Ir al metodo de Interpolación</button></a>
+        <center><a href="/interpolacion"><button style="margin: 15px">Ir al metodo de Interpolación</button></a></center>
     </body>
 </html>
