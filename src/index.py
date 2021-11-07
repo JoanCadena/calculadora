@@ -90,7 +90,7 @@ def interpolacion(x1,lx,ly):
         resX.append(result)
 
             
-    return ('La respuesta es ' + str(resX))
+    return ('La respuesta es ' + '\n' + str(resX))
     #return render_template('prueba.html')
 
 if __name__ == '__main__':
