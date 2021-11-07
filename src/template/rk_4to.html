@@ -9,7 +9,22 @@
             href="{{ url_for('static', filename='css/rk_4to.css') }}"
         />
         <title>Runge-Kutta</title>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript">
+
+            function mostrar(texto){
+
+                swal({
+
+                    title: 'La Respuesta es:',
+                    text: texto,
+                    icon: 'success'
+
+                });
+            }
+
+        </script>
         <script language="JavaScript">
             async function file_get_contents(uri, callback) {
                 let res = await fetch(uri),
@@ -32,7 +47,7 @@
                 formulario.setAttribute("action", url);
                 console.log(url);
 
-                file_get_contents(url, alert);
+                file_get_contents(url, mostrar);
             }
         </script>
     </head>
@@ -58,19 +73,12 @@
                 <input type="text" name="xf" />
                 <br />
                 <br />
-                <!--
-            <input type="submit" id="b" value="Enviar">
-            <input type="reset" id="b" value="Limpiar">
-            -->
                 <button type="button" onclick="imprimir()">
                     Visualizar resultado
                 </button>
+                <input type="reset" id="b" value="Limpiar">
             </form>
         </div>
-        <img
-            src="../static/RungeKutta.png"
-            alt="Runge-Kutta 4to orden"
-            width="300px"
-        />
+        
     </body>
 </html>

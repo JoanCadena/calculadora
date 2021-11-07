@@ -41,7 +41,7 @@ def rk_4to(x1,y1,h,fun,xf):
         ysol.append(yn)
         i += 1
 
-    return ('La respuesta es ' + str(xsol) + ' y ' +  str(ysol))
+    return ('Xsol = ' + str(xsol) + '\n' + 'Ysol = ' + str(ysol))
 
 @app.route('/interpolacion')
 def interpolacion_front():

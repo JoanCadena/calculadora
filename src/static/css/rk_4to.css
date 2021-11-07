@@ -1,23 +1,25 @@
 body{
-  background-color: #333;
+  background-color: aquamarine;
   /*background: radial-gradient(#FFF176, #F57F17);
   background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
-  background-image: linear-gradient(to top, #FFF176 0%, #F57F17 100%);**/
-  background-image: linear-gradient(to top, #dab286 0%, #F57F17 100%);
+  background-image: linear-gradient(to top, #FFF176 0%, #F57F17 100%);
+  background-image: linear-gradient(to top, #86b4da 0%, #F57F17 100%);**/
+  
   
   font-family: 'Vibur', cursive;
 }
 
 #container {
     margin-top: 35px;
-    margin-left: 25%;
+    margin-left: auto;
+    margin-right: auto;
     padding: 20px;
     background-color: #fff;
-    background-image: linear-gradient(to top, #FFF176 0%, #F57F17 100%);
+    /*background-image: linear-gradient(to top, #86b4da 0%, #F57F17 100%);**/
     border-radius: 30px;
     justify-content: center;
     align-content: center;
-    width: 35%;
+    width: 27%;
     box-shadow: -7px 7px 26px 0 #969696;
 }
 
@@ -42,13 +44,16 @@ p{
   min-width: fit-content;
 }
 
-img {
+/*img {
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 5px;
+  justify-content: center;
+  align-content: center;
+  margin-top: 35px;
 }
 
 img:hover {
   box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
   opacity: 0.8;
-}
+}**/
