@@ -1,5 +1,6 @@
 body{
     background-color:  aquamarine;
+    font-family: 'Vibur', cursive;
 }
 
 #container {
@@ -13,6 +14,25 @@ body{
     width: 50%;
     box-shadow: -7px 7px 26px 0 #969696;
 }
+
+#b{
+    max-width: 15%;
+    min-width: fit-content;
+  }
+  
+  #b:hover{
+    color: red;
+    transform: translatey(3px);
+  }
+  
+  input{
+    min-width: fit-content;
+  }
+  
+  p{
+    width: 50%;
+    min-width: fit-content;
+  }
 
 
 
